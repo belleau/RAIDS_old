@@ -50,7 +50,7 @@ for at least one super population</h1>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">snvListVCF</span><span class="op">(</span><span class="va">gds</span>, <span class="va">fileOUT</span>, offset <span class="op">=</span> <span class="fl">0</span>, freqCutoff <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">snvListVCF</span><span class="op">(</span><span class="va">gds</span>, <span class="va">fileOUT</span>, offset <span class="op">=</span> <span class="fl">0L</span>, freqCutoff <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -62,9 +62,12 @@ GDS file.</p></dd>
 <dt>fileOUT</dt>
 <dd><p>TODO</p></dd>
 <dt>offset</dt>
-<dd><p>TODO. Default: <code>0</code>.</p></dd>
+<dd><p>a single <code>integer</code> that is added to the SNP position to
+switch from 0-based to 1-based coordinate when needed (or reverse).
+Default: <code>0L</code>.</p></dd>
 <dt>freqCutoff</dt>
-<dd><p>TODO. Default: <code>NULL</code>.</p></dd>
+<dd><p>a single positive <code>numeric</code> specifying the cut-off to
+keep a SNP. If <code>NULL</code>, all SNPs are retained. Default: <code>NULL</code>.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
