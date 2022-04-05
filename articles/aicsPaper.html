@@ -111,7 +111,7 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 </h2>
 <ul>
 <li>Formatting the information from 1000 Genomes (1KG)</li>
-<li>TODO</li>
+<li>Initialize a study with sample to infer ancestry</li>
 </ul>
 <p>In the following sections, those main steps are described in details.</p>
 <p><br><br></p>
@@ -336,6 +336,112 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <span class="co">## Close both files</span>
 <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/closefn.gds.html" class="external-link">closefn.gds</a></span><span class="op">(</span><span class="va">gdsPhase</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/closefn.gds.html" class="external-link">closefn.gds</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span></code></pre></div>
+<p><br><br></p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="initialize-a-study-with-sample-to-infer-ancestry">Initialize a study with sample to infer ancestry<a class="anchor" aria-label="anchor" href="#initialize-a-study-with-sample-to-infer-ancestry"></a>
+</h3>
+<p>You need a mapped BAM with the same genome than the reference here (hg38 for 1KG) for each sample.</p>
+<div class="section level4">
+<h4 id="extract-the-read-at-each-in-the-gds">Extract the read at each in the GDS<a class="anchor" aria-label="anchor" href="#extract-the-read-at-each-in-the-gds"></a>
+</h4>
+<p>We used here snp-pileup from Facet</p>
+<p>First you a vcf file with the SNV you want to keep</p>
+</div>
+<div class="section level4">
+<h4 id="create-a-vcf-file-with-the-snv-you-want-tokeep">Create a VCF file with the SNV you want tokeep<a class="anchor" aria-label="anchor" href="#create-a-vcf-file-with-the-snv-you-want-tokeep"></a>
+</h4>
+<p>In R</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R">    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">aicsPaper</span><span class="op">)</span>
+    
+    <span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SNPRelate/man/snpgdsOpen.html" class="external-link">snpgdsOpen</a></span><span class="op">(</span><span class="va">fileGDS1kg</span><span class="op">)</span>
+    <span class="fu"><a href="../reference/snvListVCF.html">snvListVCF</a></span><span class="op">(</span><span class="va">gds</span>, <span class="va">fileOUT</span>, offset <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/closefn.gds.html" class="external-link">closefn.gds</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span></code></pre></div>
+<p>You should compress and indexing the vcf file You need to install <a href="http://www.htslib.org/download/" class="external-link">HTSlib</a></p>
+<p>in a terminal</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>     bgzip fileOUT</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>     tabix <span class="sc">-</span>p vcf fileOUT.gz</span></code></pre></div>
+<p>You need a ped file with the column:</p>
+<p>“sample.id”* Id of the sample but the sample can be genotyped more than one “sex”<em> “pop.group”</em> can be self declare or something else but must be there “superPop”* can be self declare or something else but must be there “Sample.Type”* Ex Primary Tumor or Blood Derived Normal “Diagnosis”* C or N (cancer normal) this is for the sample not the patient “Source”* The tissue ex Ovary “Recurrent”<br>
+“Case.ID” Patient identifiant<br>
+“Name.ID”* This the unique id of the table “batch” Number</p>
+<p>You need the extra code in the package Facet to extract the SNV <a href="https://github.com/mskcc/facets/tree/master/inst/extcode" class="external-link">snp-pileup</a></p>
+<p>The output from snp-pileup should be Name.ID.txt (snp-pileup add .gz to the filename)</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>    snp<span class="sc">-</span>pileup <span class="sc">-</span>g <span class="sc">-</span>d5000 <span class="sc">-</span>q15 <span class="sc">-</span>Q20  <span class="sc">-</span>r0 VCFGenerateAbove snvSel0.<span class="fl">01.</span>vcf.gz OUTPUT.txt FILEBAM.bam</span></code></pre></div>
+<p>TODO change the path to something generic</p>
+<p>in R:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R">    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">aicsPaper</span><span class="op">)</span>
+    
+    <span class="va">PATHGENO</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"snpCancer"</span><span class="op">)</span>
+    <span class="va">PATHMETA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"metadata"</span><span class="op">)</span>
+    <span class="va">PATHGDS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"genoGDS1000gAF.All.TCGA_OV.WXS"</span><span class="op">)</span>
+    
+    <span class="va">fileNamePED</span> <span class="op">&lt;-</span> <span class="st">"pedTCGA_OV_WXS_C.rds"</span>
+    <span class="va">fileNameGDS</span> <span class="op">&lt;-</span> <span class="st">"matGeno1000g.gds"</span>
+    
+    <span class="va">filePED</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">PATHMETA</span>, <span class="va">fileNamePED</span><span class="op">)</span>
+    <span class="va">fileNameGDS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">PATHGDS</span>, <span class="va">fileNameGDS</span><span class="op">)</span>
+    
+    <span class="va">ped</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="va">filePED</span><span class="op">)</span>
+    
+    <span class="va">studyDF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>study.id <span class="op">=</span> <span class="st">"TCGA-OV.WXS.C"</span>,
+                              study.desc <span class="op">=</span> <span class="st">"Ovarian example"</span>,
+                              study.platform <span class="op">=</span> <span class="st">"WXS"</span>,
+                              stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+    
+    <span class="va">listSamples</span> <span class="op">&lt;-</span> <span class="va">ped</span><span class="op">[</span>, <span class="st">"Name.ID"</span><span class="op">]</span>
+    <span class="fu"><a href="../reference/appendStudy2GDS1KG.html">appendStudy2GDS1KG</a></span><span class="op">(</span>PATHGENO <span class="op">=</span> <span class="va">PATHGENO</span>,
+                       fileNamePED <span class="op">=</span> <span class="va">filePED</span>,
+                       fileNameGDS <span class="op">=</span> <span class="va">fileNameGDS</span>,
+                       listSamples <span class="op">=</span> <span class="va">listSamples</span>,
+                       studyDesc <span class="op">=</span> <span class="va">studyDF</span>,
+                       batch <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p>We select a subset of SNV pruned SNV We create a GDS for each sample with only the SNP in the pruning. It use more disk space but the analysis for the samples can be run simulatanusly with multiple process (if we we all samples in one file only one process can write in the GDS).</p>
+<p>or in R for a s</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R">    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">aicsPaper</span><span class="op">)</span>
+    
+    <span class="co"># fileNameGDS with the sample and 1KG genotype</span>
+    <span class="co"># listSamples list of sample.id from the study</span>
+    <span class="co"># PATHSAMPLEGDS is the path where the gds specific </span>
+    <span class="co"># to the sample is created</span>
+    
+    <span class="va">studyCur</span> <span class="op">&lt;-</span> <span class="st">"Study.name"</span>
+    <span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SNPRelate/man/snpgdsOpen.html" class="external-link">snpgdsOpen</a></span><span class="op">(</span><span class="va">fileNameGDS</span><span class="op">)</span>
+    
+    <span class="va">gdsfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">pathGDS</span>, <span class="va">gdsName</span><span class="op">)</span>
+    <span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SNPRelate/man/snpgdsOpen.html" class="external-link">snpgdsOpen</a></span><span class="op">(</span><span class="va">gdsfile</span><span class="op">)</span>
+    
+    <span class="va">sampleGDS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/index.gdsn.html" class="external-link">index.gdsn</a></span><span class="op">(</span><span class="va">gds</span>, <span class="st">"sample.id"</span><span class="op">)</span>
+    <span class="va">sample.id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/read.gdsn.html" class="external-link">read.gdsn</a></span><span class="op">(</span><span class="va">sampleGDS</span><span class="op">)</span>
+    
+    <span class="va">study.offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/read.gdsn.html" class="external-link">read.gdsn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/index.gdsn.html" class="external-link">index.gdsn</a></span><span class="op">(</span><span class="va">gds</span>, <span class="st">"study.offset"</span><span class="op">)</span><span class="op">)</span>
+    
+    <span class="va">study.id</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/read.gdsn.html" class="external-link">read.gdsn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/index.gdsn.html" class="external-link">index.gdsn</a></span><span class="op">(</span><span class="va">gds</span>, <span class="st">"study.annot/study.id"</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">sampleCurrent</span> <span class="op">&lt;-</span> <span class="va">sample.id</span><span class="op">[</span><span class="va">study.start</span><span class="op">[</span><span class="va">pos</span><span class="op">]</span> <span class="op">+</span> <span class="va">sampleNum</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span>
+    <span class="va">listSamples</span> <span class="op">&lt;-</span> <span class="va">sample.id</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">study.id</span> <span class="op">==</span> <span class="va">studyCur</span><span class="op">)</span> <span class="op">+</span> <span class="va">study.offset</span><span class="op">]</span>
+
+    <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">listSamples</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">pruned</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pruningSample.html">pruningSample</a></span><span class="op">(</span>gds<span class="op">=</span><span class="va">gds</span>,
+                                            method<span class="op">=</span><span class="st">"corr"</span>,
+                                            sampleCurrent <span class="op">=</span> <span class="va">listSamples</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
+                                            listSNP <span class="op">=</span> <span class="cn">NULL</span>,
+                                            slide.max.bp.v <span class="op">=</span> <span class="fl">5e5</span>,
+                                            ld.threshold.v<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>,
+                                            np <span class="op">=</span> <span class="fl">1</span>,
+                                            verbose.v<span class="op">=</span><span class="cn">FALSE</span>,
+                                            chr <span class="op">=</span> <span class="cn">NULL</span>,
+                                            minAF.SuperPop <span class="op">=</span> <span class="cn">NULL</span>,
+                                            keepGDSpruned <span class="op">=</span> <span class="cn">TRUE</span>,
+                                            PATHSAMPLEGDS <span class="op">=</span> <span class="va">PATHSAMPLEGDS</span>,
+                                            keepFile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+    <span class="op">}</span>
+    
+    <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/closefn.gds.html" class="external-link">closefn.gds</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span></code></pre></div>
 <p><br><br></p>
 </div>
 </div>
