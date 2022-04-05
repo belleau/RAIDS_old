@@ -46,6 +46,9 @@
     <loc>/reference/appendStudy2GDS1KG.html</loc>
   </url>
   <url>
+    <loc>/reference/basePCASample.html</loc>
+  </url>
+  <url>
     <loc>/reference/gds2tfam.html</loc>
   </url>
   <url>
@@ -86,6 +89,9 @@
   </url>
   <url>
     <loc>/reference/prepPed1KG.html</loc>
+  </url>
+  <url>
+    <loc>/reference/projectSample2PCA.html</loc>
   </url>
   <url>
     <loc>/reference/pruning1KG.Chr.html</loc>
