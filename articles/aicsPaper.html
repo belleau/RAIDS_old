@@ -276,15 +276,20 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <h4 id="identify-genetically-related-patients-in-1kg">Identify genetically related patients in 1KG<a class="anchor" aria-label="anchor" href="#identify-genetically-related-patients-in-1kg"></a>
 </h4>
 <p>As only unrelated patients can be used in the following analyses, the genetically related patients in 1KG must be identified.</p>
-<p>The function <strong>identifyRelative()</strong> identifies patients that are genetically related in the 1KG files. It generates a file with the unrelated patient information (filePart parameter) as well as a file with the kinship coefficient between the patients (fileIBD parameter).</p>
+<p>The function <strong>identifyRelative()</strong> identifies patients that are genetically related in the 1KG files. It generates a RDS file with the unrelated patient information (<strong>filePart</strong> parameter) as well as a RDS file with the kinship coefficient between the patients (<strong>fileIBD</strong> parameter).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## TODO: what is PATHMETA </span>
+<code class="sourceCode R"><span class="co">## Load required package</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/zhengxwen/gdsfmt" class="external-link">gdsfmt</a></span><span class="op">)</span>
+
+<span class="co">## TODO: what is PATHMETA </span>
 
 <span class="co">## The name of the GDS file that contains the 1KG information    </span>
 <span class="va">fileNameGDS</span> <span class="op">&lt;-</span> <span class="st">"matGeno1000g.gds"</span>
 <span class="va">fileGDS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">PATHGDS</span>, <span class="va">fileNameGDS</span><span class="op">)</span>
 
-<span class="co">## TODO: whait are those?</span>
+<span class="co">## Files that will be created by the identifyRelative() function</span>
+<span class="co">## The first RDS file will contain the kinship information between patients</span>
+<span class="co">## The second RDS file will contain the list of unrelated patients</span>
 <span class="va">fileIBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">PATHMETA</span>,<span class="st">"ibd.All.0.05.rds"</span><span class="op">)</span>
 <span class="va">filePart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">PATHMETA</span>,<span class="st">"part.All.0.05.rds"</span><span class="op">)</span>
 
@@ -300,7 +305,7 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <p><br><br></p>
 </div>
 <div class="section level4">
-<h4 id="add-information-about-unrelated-1kg-patients-to-the-1kg-gds-file">Add information about unrelated 1KG patients to the 1KG GDS file<a class="anchor" aria-label="anchor" href="#add-information-about-unrelated-1kg-patients-to-the-1kg-gds-file"></a>
+<h4 id="add-information-about-unrelated-patients-to-the-1kg-gds-file">Add information about unrelated patients to the 1KG GDS file<a class="anchor" aria-label="anchor" href="#add-information-about-unrelated-patients-to-the-1kg-gds-file"></a>
 </h4>
 <p>Only the unrelated patients from 1KG are used in the following ancestry inference and kept in the GDS 1KG file. The function <strong>identifyRelative()</strong> identifies the unrelated patients and saves the information about those patients in an intermediate external file.</p>
 <p>The function <strong>addRef2GDS1KG()</strong> is adding the information about the unrelated patients to the GDS 1KG file using the intermediate external file.</p>
@@ -340,25 +345,37 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 </div>
 </div>
 <div class="section level3">
-<h3 id="initialize-a-study-with-sample-to-infer-ancestry">Initialize a study with sample to infer ancestry<a class="anchor" aria-label="anchor" href="#initialize-a-study-with-sample-to-infer-ancestry"></a>
+<h3 id="format-information-from-an-external-study-to-get-if-ready-for-ancestry-inference">Format information from an external study to get if ready for ancestry inference<a class="anchor" aria-label="anchor" href="#format-information-from-an-external-study-to-get-if-ready-for-ancestry-inference"></a>
 </h3>
-<p>You need a mapped BAM with the same genome than the reference here (hg38 for 1KG) for each sample.</p>
+<p>To run the ancestry inference on samples from an external study, the sample information must be formatted in a specific format.</p>
+<p>Those steps shows how to prepare the sample information needed as input for the ancestry inference.</p>
+<p>First, you need a mapped BAM file for each sample. The reference genome used for the mapping must correspond to the one used to generate the 1KG GDS file. In this case, the 1KG GDS file is based on genome hg38.</p>
 <div class="section level4">
-<h4 id="extract-the-read-at-each-in-the-gds">Extract the read at each in the GDS<a class="anchor" aria-label="anchor" href="#extract-the-read-at-each-in-the-gds"></a>
+<h4 id="extract-the-read-coverage-at-each-snp-position-in-the-1kg-gds-file">Extract the read coverage at each SNP position in the 1KG GDS file<a class="anchor" aria-label="anchor" href="#extract-the-read-coverage-at-each-snp-position-in-the-1kg-gds-file"></a>
 </h4>
 <p>We used here snp-pileup from Facet</p>
 <p>First you a vcf file with the SNV you want to keep</p>
+<p><br><br></p>
 </div>
 <div class="section level4">
-<h4 id="create-a-vcf-file-with-the-snv-you-want-tokeep">Create a VCF file with the SNV you want tokeep<a class="anchor" aria-label="anchor" href="#create-a-vcf-file-with-the-snv-you-want-tokeep"></a>
+<h4 id="create-a-vcf-file-containing-the-retained-snp-positions-from-1kg-gds-file">Create a VCF file containing the retained SNP positions from 1KG GDS file<a class="anchor" aria-label="anchor" href="#create-a-vcf-file-containing-the-retained-snp-positions-from-1kg-gds-file"></a>
 </h4>
-<p>In R</p>
+<p>The <strong>snvListVCF()</strong> function is used to generate a VCF file that will contain the information of all retained SNPs from 1KG GDS file.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R">    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">aicsPaper</span><span class="op">)</span>
-    
-    <span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SNPRelate/man/snpgdsOpen.html" class="external-link">snpgdsOpen</a></span><span class="op">(</span><span class="va">fileGDS1kg</span><span class="op">)</span>
-    <span class="fu"><a href="../reference/snvListVCF.html">snvListVCF</a></span><span class="op">(</span><span class="va">gds</span>, <span class="va">fileOUT</span>, offset <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/closefn.gds.html" class="external-link">closefn.gds</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co">## Load required package</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">aicsPaper</span><span class="op">)</span>
+
+<span class="co">## Open the 1KG GDS file    </span>
+<span class="va">gds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SNPRelate/man/snpgdsOpen.html" class="external-link">snpgdsOpen</a></span><span class="op">(</span><span class="va">fileGDS1kg</span><span class="op">)</span>
+
+<span class="co">## The VCF file that will be created</span>
+<span class="va">fileOUT</span> <span class="op">&lt;-</span> <span class="st">"SNPretained.VCF"</span>
+
+<span class="co">## Generate the VCF with the retained SNP position</span>
+<span class="fu"><a href="../reference/snvListVCF.html">snvListVCF</a></span><span class="op">(</span>gds<span class="op">=</span><span class="va">gds</span>, fileOUT<span class="op">=</span><span class="va">fileOUT</span>, offset<span class="op">=</span><span class="fl">1</span>, freqCutoff<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
+
+<span class="co">## Close the 1KG GDS file </span>
+<span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/closefn.gds.html" class="external-link">closefn.gds</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span></code></pre></div>
 <p>You should compress and indexing the vcf file You need to install <a href="http://www.htslib.org/download/" class="external-link">HTSlib</a></p>
 <p>in a terminal</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>     bgzip fileOUT</span>
