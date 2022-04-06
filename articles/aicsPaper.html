@@ -399,7 +399,7 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <div class="section level4">
 <h4 id="create-a-vcf-file-containing-the-retained-snp-positions-from-1kg-gds-file">Create a VCF file containing the retained SNP positions from 1KG GDS file<a class="anchor" aria-label="anchor" href="#create-a-vcf-file-containing-the-retained-snp-positions-from-1kg-gds-file"></a>
 </h4>
-<p>The <strong>snvListVCF()</strong> function is used to generate a VCF file that will contain the information of all retained SNPs from 1KG GDS file.</p>
+<p>The <strong>snvListVCF()</strong> function is used to generate a VCF file that contains the information of all retained SNPs from 1KG GDS fil:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Load required package</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">aicsPaper</span><span class="op">)</span>
@@ -415,15 +415,22 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 
 <span class="co">## Close the 1KG GDS file </span>
 <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/closefn.gds.html" class="external-link">closefn.gds</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span></code></pre></div>
-<p>You should compress and indexing the vcf file You need to install <a href="http://www.htslib.org/download/" class="external-link">HTSlib</a> <span class="citation">(Bonfield et al. 2021)</span>.</p>
-<p>in a terminal</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>     bgzip fileOUT</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>     tabix <span class="sc">-</span>p vcf fileOUT.gz</span></code></pre></div>
+<p>You should compress and indexing the newly created VCF file. Do do so, you need to install <a href="http://www.htslib.org/download/" class="external-link">HTSlib</a> <span class="citation">(Bonfield et al. 2021)</span>.</p>
+<p>In a terminal:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## This in not a R script</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## This script is in bash</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Compress the new VCF file (fileOUT parameter)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>bgzip fileOUT</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Index the new VCF file</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## HTSlib software is needed</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>tabix <span class="sc">-</span>p vcf fileOUT.gz</span></code></pre></div>
 <p>You need a ped file with the column:</p>
 <p>“sample.id”* Id of the sample but the sample can be genotyped more than one “sex”<em> “pop.group”</em> can be self declare or something else but must be there “superPop”* can be self declare or something else but must be there “Sample.Type”* Ex Primary Tumor or Blood Derived Normal “Diagnosis”* C or N (cancer normal) this is for the sample not the patient “Source”* The tissue ex Ovary “Recurrent”<br>
 “Case.ID” Patient identifiant<br>
 “Name.ID”* This the unique id of the table “batch” Number</p>
-<p>You need the extra code in the package Facet to extract the SNV <a href="https://github.com/mskcc/facets/tree/master/inst/extcode" class="external-link">snp-pileup</a></p>
+<p>You need the extra code in the package Facet to extract the SNV <a href="https://github.com/mskcc/facets/tree/master/inst/extcode" class="external-link">snp-pileup</a> <span class="citation">(Shen and Seshan 2016)</span>.</p>
 <p>The output from snp-pileup should be Name.ID.txt (snp-pileup add .gz to the filename)</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>    snp<span class="sc">-</span>pileup <span class="sc">-</span>g <span class="sc">-</span>d5000 <span class="sc">-</span>q15 <span class="sc">-</span>Q20  <span class="sc">-</span>r0 VCFGenerateAbove snvSel0.<span class="fl">01.</span>vcf.gz OUTPUT.txt FILEBAM.bam</span></code></pre></div>
 <p>TODO change the path to something generic</p>
@@ -611,6 +618,9 @@ Price, A. L., N. J. Patterson, R. M. Plenge, M. E. Weinblatt, N. A. Shadick, and
 </div>
 <div id="ref-Pritchard2000" class="csl-entry">
 Pritchard, J. K., M. Stephens, and P. Donnelly. 2000. <span>“Inference of Population Structure Using Multilocus Genotype Data.”</span> <em>Genetics</em> 155 (2): 945–59. <a href="https://www.ncbi.nlm.nih.gov/pubmed/10835412" class="external-link">https://www.ncbi.nlm.nih.gov/pubmed/10835412</a>.
+</div>
+<div id="ref-Shen2016" class="csl-entry">
+Shen, R, and V E Seshan. 2016. <span>“<span class="nocase">FACETS: allele-specific copy number and clonal heterogeneity analysis tool for high-throughput DNA sequencing</span>.”</span> <em>Nucleic Acids Res</em> 44 (16): e131. <a href="https://doi.org/10.1093/nar/gkw520" class="external-link">https://doi.org/10.1093/nar/gkw520</a>.
 </div>
 </div>
 </div>
