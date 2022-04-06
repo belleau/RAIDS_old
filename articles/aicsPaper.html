@@ -383,7 +383,12 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 </h3>
 <p>To run the ancestry inference on samples from an external study, the sample information must be formatted in a specific format.</p>
 <p>Those steps shows how to prepare the sample information needed as input for the ancestry inference.</p>
-<p>First, you need a mapped BAM file for each sample. The reference genome used for the mapping must correspond to the one used to generate the 1KG GDS file. In this case, the 1KG GDS file is based on genome hg38.</p>
+<p>Those steps are:</p>
+<ol style="list-style-type: decimal">
+<li>Extract the read coverage at each SNP position in the 1KG GDS file</li>
+<li>Create a VCF file containing the retained SNP positions from 1KG GDS file</li>
+</ol>
+<p>Beware that a mapped BAM file is needed for each sample. The reference genome used for the mapping must correspond to the one used to generate the 1KG GDS file. In this case, the 1KG GDS file is based on genome hg38.</p>
 <div class="section level4">
 <h4 id="extract-the-read-coverage-at-each-snp-position-in-the-1kg-gds-file">Extract the read coverage at each SNP position in the 1KG GDS file<a class="anchor" aria-label="anchor" href="#extract-the-read-coverage-at-each-snp-position-in-the-1kg-gds-file"></a>
 </h4>
@@ -410,7 +415,7 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 
 <span class="co">## Close the 1KG GDS file </span>
 <span class="fu"><a href="https://rdrr.io/pkg/gdsfmt/man/closefn.gds.html" class="external-link">closefn.gds</a></span><span class="op">(</span><span class="va">gds</span><span class="op">)</span></code></pre></div>
-<p>You should compress and indexing the vcf file You need to install <a href="http://www.htslib.org/download/" class="external-link">HTSlib</a></p>
+<p>You should compress and indexing the vcf file You need to install <a href="http://www.htslib.org/download/" class="external-link">HTSlib</a> <span class="citation">(Bonfield et al. 2021)</span>.</p>
 <p>in a terminal</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>     bgzip fileOUT</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>     tabix <span class="sc">-</span>p vcf fileOUT.gz</span></code></pre></div>
@@ -597,6 +602,9 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Alexander2009" class="csl-entry">
 Alexander, D. H., J. Novembre, and K. Lange. 2009. <span>“Fast Model-Based Estimation of Ancestry in Unrelated Individuals.”</span> <em>Genome Res</em> 19 (9): 1655–64. <a href="https://doi.org/10.1101/gr.094052.109" class="external-link">https://doi.org/10.1101/gr.094052.109</a>.
+</div>
+<div id="ref-Bonfield2021" class="csl-entry">
+Bonfield, James K, John Marshall, Petr Danecek, Heng Li, Valeriu Ohan, Andrew Whitwham, Thomas Keane, and Robert M Davies. 2021. <span>“<span class="nocase">HTSlib: C library for reading/writing high-throughput sequencing data</span>.”</span> <em>GigaScience</em> 10 (2). <a href="https://doi.org/10.1093/gigascience/giab007" class="external-link">https://doi.org/10.1093/gigascience/giab007</a>.
 </div>
 <div id="ref-Price2006" class="csl-entry">
 Price, A. L., N. J. Patterson, R. M. Plenge, M. E. Weinblatt, N. A. Shadick, and D. Reich. 2006. <span>“Principal Components Analysis Corrects for Stratification in Genome-Wide Association Studies.”</span> <em>Nat Genet</em> 38 (8): 904–9. <a href="https://doi.org/10.1038/ng1847" class="external-link">https://doi.org/10.1038/ng1847</a>.
