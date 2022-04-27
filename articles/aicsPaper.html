@@ -109,18 +109,32 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <div class="section level2">
 <h2 id="main-steps">Main Steps<a class="anchor" aria-label="anchor" href="#main-steps"></a>
 </h2>
+<p>This is an overview of genetic ancestry inference from cancer-derived molecular data:</p>
+<div class="figure" style="text-align: center">
+<img src="MainSteps_v01.png" alt="An overview of the genetic ancestry inference process." width="120%"><p class="caption">
+An overview of the genetic ancestry inference process.
+</p>
+</div>
+<p>The main steps are:</p>
 <ol style="list-style-type: decimal">
-<li>Format the information from 1000 Genomes (optional)</li>
-<li>Format the information from an external study to get if ready for ancestry inference</li>
+<li>Format the information from 1000 Genomes (1KG) (optional)</li>
+<li>Format the information from an external study</li>
+<li>Find the optimized parameters for the ancestry inference</li>
+<li>Run the ancestry inference on the external study</li>
 </ol>
 <p>In the following sections, those main steps are described in details.</p>
 <p><br><br></p>
 <div class="section level3">
-<h3 id="formatting-the-information-from-1000-genomes-optional">Formatting the information from 1000 Genomes (optional)<a class="anchor" aria-label="anchor" href="#formatting-the-information-from-1000-genomes-optional"></a>
+<h3 id="step-1--formatting-the-information-from-1000-genomes-optional">Step 1. Formatting the information from 1000 Genomes (optional)<a class="anchor" aria-label="anchor" href="#step-1--formatting-the-information-from-1000-genomes-optional"></a>
 </h3>
-<p>Those steps explain how to generate the 1000 Genomes (1KG) GDS file that is needed to run the ancestry inference tool. Beware that it is unnecessary to re-run those steps as the 1KG GDS file is publicly available.</p>
+<div class="figure" style="text-align: center">
+<img src="MainSteps_Step1_v01.png" alt="Step 1 - Formatting the information from 1000 Genomes (optional)" width="120%"><p class="caption">
+Step 1 - Formatting the information from 1000 Genomes (optional)
+</p>
+</div>
+<p>This section explains in further details how to generate the 1000 Genomes (1KG) GDS file that is needed to run the ancestry inference tool. Beware that it is unnecessary to re-run those steps as the 1KG GDS file is publicly available.</p>
 <p><span style="color:red">The 1KG GDS file will be available soon.</span></p>
-<p>More specifically, the steps of this procedure are:</p>
+<p>More specifically, the formatting of the 1KG information includes all those sub-steps:</p>
 <ol style="list-style-type: decimal">
 <li>Download the required files from 1KG</li>
 <li>Split the 1KG genotyping file to one file per sample per chromosome</li>
@@ -133,8 +147,8 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <li>Add information about unrelated patients to the 1KG GDS file</li>
 <li>Create a second GDS file containing the 1KG phase information</li>
 </ol>
-<p>Beware that those steps are time, as well as, space consuming.</p>
-<p>In the following sections, those steps are described in details.</p>
+<p>Beware that those sub-steps are time, as well as, space consuming.</p>
+<p>In the following sections, those sub-steps are described in details.</p>
 <p><br></p>
 <div class="section level4">
 <h4 id="download-the-required-files-from-1kg">Download the required files from 1KG<a class="anchor" aria-label="anchor" href="#download-the-required-files-from-1kg"></a>
@@ -158,37 +172,55 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <h4 id="split-the-1kg-genotyping-file-to-one-file-per-sample-per-chromosome">Split the 1KG genotyping file to one file per sample per chromosome<a class="anchor" aria-label="anchor" href="#split-the-1kg-genotyping-file-to-one-file-per-sample-per-chromosome"></a>
 </h4>
 <p>To facilitate the manipulation of the genotyping data, the large 1KG genotyping files are split into smaller files (one per sample).</p>
-<p>As there is one genotyping file per chromosome, the process must be executed for each of those.</p>
+<p>As there is one genotyping file per chromosome, the process must be executed for each of chromosome</p>
 <p>The splitting is done through a bash script:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## This in not a R script</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## This script is in bash</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## The script has to be run separately for each chromosome</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## The variable chrCur is one specific chromosome (example, chrCur="chr1")</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## The variable PATHGENO is a specified directory</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Create one directory for the specific chromosome</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">$</span>{PATHGENO}<span class="sc">/</span><span class="er">$</span>{chrCur}</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## The variable FILECUR is the associated VCF file for the specific chromosome</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## FILECUR is the vcf file from 1000 genome</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Example, FILECUR=ALL.chr1.shapeit2_integrated_v1a.GRCh38.20181129.phased.vcf.gz</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="do">## There is 2548 samples in the VCF file</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## The information associated to each sample is extracted and a VCF file </span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="do">## specific to this sample for the current chromosome is generated</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="st">`</span><span class="at">seq 1 2548</span><span class="st">`</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>do</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    j<span class="ot">=</span><span class="er">$</span>(( <span class="sc">$</span>i <span class="sc">+</span> <span class="dv">9</span> ))</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    SAMPLE<span class="ot">=</span><span class="er">$</span>(zcat <span class="sc">$</span>FILECUR<span class="sc">||</span>head <span class="sc">-</span>n <span class="dv">1000</span> <span class="sc">|</span>grep <span class="st">"#CHROM"</span><span class="sc">|</span>cut <span class="sc">-</span>d<span class="sc">$</span><span class="st">'</span><span class="sc">\t</span><span class="st">'</span> <span class="sc">-</span>f<span class="sc">$</span>j)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    zcat <span class="sc">$</span>FILECUR<span class="sc">|</span>grep <span class="sc">-</span>v <span class="st">"##"</span><span class="sc">|</span>cut <span class="sc">-</span>d<span class="sc">$</span><span class="st">'</span><span class="sc">\t</span><span class="st">'</span> <span class="sc">-</span>f<span class="sc">$</span>j <span class="sc">|</span>bzip2 <span class="sc">-</span>c <span class="sc">&gt;</span> <span class="er">$</span>{SAMPLE}.<span class="sc">$</span>{CHR}.vcf.bz2</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>done</span></code></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Create one directory for the specific chromosome</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Two variables need to be assigned</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## The variable PATHGENO is the path where the split 1KG genotyping </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   files will be located</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## The variable chrCur is the current chromosome (ex: "chr1"), a sub-directory </span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   with the name of the chromosome will be created. The variable must </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   include the prefix "chr".</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Ex: PATHGENO=./genotypingPerSample</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Ex: chrCur=chr1</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>mkdir <span class="sc">$</span>{PATHGENO}<span class="sc">/</span><span class="er">$</span>{chrCur}</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>cd <span class="sc">$</span>{PATHGENO}<span class="sc">/</span><span class="er">$</span>{chrCur}</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="do">## The variable FILECUR is the associated 1KG genotyping VCF file for the </span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="do">##     specific chromosome</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="do">## The variable FILECUR must also contain the relative or complete path to </span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="do">##     the VCF file</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Ex: FILECUR=../../1KG_files/ALL.chr1.shapeit2_integrated_v1a.GRCh38.20181129.phased.vcf.gz</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="do">## There is 2548 samples in one phase VCF file</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="do">## The information associated to each sample is extracted and a VCF file </span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="do">## specific to each sample for the current chromosome is generated</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="st">`</span><span class="at">seq 1 2548</span><span class="st">`</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>do</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    j<span class="ot">=</span><span class="er">$</span>(( <span class="sc">$</span>i <span class="sc">+</span> <span class="dv">9</span> ))</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    SAMPLE<span class="ot">=</span><span class="er">$</span>(zcat <span class="sc">$</span>FILECUR<span class="sc">||</span>head <span class="sc">-</span>n <span class="dv">1000</span> <span class="sc">|</span>grep <span class="st">"#CHROM"</span><span class="sc">|</span>cut <span class="sc">-</span>d<span class="sc">$</span><span class="st">'</span><span class="sc">\t</span><span class="st">'</span> <span class="sc">-</span>f<span class="sc">$</span>j)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    zcat <span class="sc">$</span>FILECUR<span class="sc">|</span>grep <span class="sc">-</span>v <span class="st">"##"</span><span class="sc">|</span>cut <span class="sc">-</span>d<span class="sc">$</span><span class="st">'</span><span class="sc">\t</span><span class="st">'</span> <span class="sc">-</span>f<span class="sc">$</span>j <span class="sc">|</span>bzip2 <span class="sc">-</span>c <span class="sc">&gt;</span> <span class="er">$</span>{SAMPLE}.<span class="sc">$</span>{CHR}.vcf.bz2</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>done</span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level4">
 <h4 id="combine-the-chromosomes-to-obtain-one-genotyping-file-per-sample">Combine the chromosomes to obtain one genotyping file per sample<a class="anchor" aria-label="anchor" href="#combine-the-chromosomes-to-obtain-one-genotyping-file-per-sample"></a>
 </h4>
 <p>The genotyping information for all chromosomes is merged so that there is only one genotyping file per sample.</p>
+<div class="figure" style="text-align: center">
+<img src="groupChr1KGSNV_v01.png" alt="The function groupChr1KGSNV() merge samples that are split by chromosomes into one file." width="120%"><p class="caption">
+The function groupChr1KGSNV() merge samples that are split by chromosomes into one file.
+</p>
+</div>
 <p>The <strong>groupChr1KGSNV()</strong> function is used to combine the genotyping information from multiple files.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Load required package</span>
@@ -274,8 +306,8 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <span class="co">## Create a RDS with filter SNPs (fileFREQ parameter)</span>
 <span class="co">## Also creates a RDS with the indexes of the retained SNPs (fileFREQ parameter)</span>
 <span class="fu"><a href="../reference/generateMapSnvSel.html">generateMapSnvSel</a></span><span class="op">(</span>cutOff<span class="op">=</span><span class="fl">0.01</span>, fileSNV<span class="op">=</span><span class="va">fileSNV.v</span>,
-                      fileLSNP <span class="op">=</span> <span class="va">fileLSNP.v</span>,
-                      fileFREQ <span class="op">=</span> <span class="va">fileFREQ.v</span><span class="op">)</span></code></pre></div>
+                      fileLSNP<span class="op">=</span><span class="va">fileLSNP.v</span>,
+                      fileFREQ<span class="op">=</span><span class="va">fileFREQ.v</span><span class="op">)</span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level4">
@@ -379,7 +411,7 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 </div>
 </div>
 <div class="section level3">
-<h3 id="format-information-from-an-external-study-to-get-if-ready-for-ancestry-inference">Format information from an external study to get if ready for ancestry inference<a class="anchor" aria-label="anchor" href="#format-information-from-an-external-study-to-get-if-ready-for-ancestry-inference"></a>
+<h3 id="step-2--format-information-from-an-external-study-to-get-if-ready-for-ancestry-inference">Step 2. Format information from an external study to get if ready for ancestry inference<a class="anchor" aria-label="anchor" href="#step-2--format-information-from-an-external-study-to-get-if-ready-for-ancestry-inference"></a>
 </h3>
 <p>To run the ancestry inference on samples from an external study, the sample information must be formatted in a specific format.</p>
 <p>Those steps shows how to prepare the sample information needed as input for the ancestry inference.</p>
@@ -426,7 +458,7 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Index the new VCF file</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## HTSlib software is needed</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>tabix <span class="sc">-</span>p vcf fileOUT.gz</span></code></pre></div>
-<p>You need a ped file with the column:</p>
+<p>You need a <strong>ped</strong> file with the column:</p>
 <p>“sample.id”* Id of the sample but the sample can be genotyped more than one “sex”<em> “pop.group”</em> can be self declare or something else but must be there “superPop”* can be self declare or something else but must be there “Sample.Type”* Ex Primary Tumor or Blood Derived Normal “Diagnosis”* C or N (cancer normal) this is for the sample not the patient “Source”* The tissue ex Ovary “Recurrent”<br>
 “Case.ID” Patient identifiant<br>
 “Name.ID”* This the unique id of the table “batch” Number</p>
@@ -539,7 +571,7 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <span class="co">##  [9] Biobase_2.52.0            GenomicRanges_1.44.0     </span>
 <span class="co">## [11] GenomeInfoDb_1.28.4       IRanges_2.26.0           </span>
 <span class="co">## [13] S4Vectors_0.30.2          BiocGenerics_0.38.0      </span>
-<span class="co">## [15] gdsfmt_1.28.1             knitr_1.38               </span>
+<span class="co">## [15] gdsfmt_1.28.1             knitr_1.39               </span>
 <span class="co">## [17] BiocStyle_2.20.2         </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
@@ -578,29 +610,29 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <span class="co">##  [65] curl_4.3.2                  memoise_2.0.1              </span>
 <span class="co">##  [67] sass_0.4.1                  biomaRt_2.48.3             </span>
 <span class="co">##  [69] stringi_1.7.6               RSQLite_2.2.12             </span>
-<span class="co">##  [71] BiocIO_1.2.0                desc_1.4.1                 </span>
-<span class="co">##  [73] foreach_1.5.2               filelock_1.0.2             </span>
-<span class="co">##  [75] BiocParallel_1.26.2         operator.tools_1.6.3       </span>
-<span class="co">##  [77] rlang_1.0.2                 pkgconfig_2.0.3            </span>
-<span class="co">##  [79] systemfonts_1.0.4           matrixStats_0.62.0         </span>
-<span class="co">##  [81] bitops_1.0-7                SeqArray_1.32.0            </span>
-<span class="co">##  [83] evaluate_0.15               lattice_0.20-45            </span>
-<span class="co">##  [85] purrr_0.3.4                 GenomicAlignments_1.28.0   </span>
-<span class="co">##  [87] bit_4.0.4                   tidyselect_1.1.2           </span>
-<span class="co">##  [89] magrittr_2.0.3              bookdown_0.26              </span>
-<span class="co">##  [91] R6_2.5.1                    generics_0.1.2             </span>
-<span class="co">##  [93] DelayedArray_0.18.0         DBI_1.1.2                  </span>
-<span class="co">##  [95] withr_2.5.0                 mgcv_1.8-40                </span>
-<span class="co">##  [97] pillar_1.7.0                GWASExactHW_1.01           </span>
-<span class="co">##  [99] survival_3.3-1              KEGGREST_1.32.0            </span>
-<span class="co">## [101] RCurl_1.98-1.6              tibble_3.1.6               </span>
-<span class="co">## [103] crayon_1.5.1                utf8_1.2.2                 </span>
-<span class="co">## [105] BiocFileCache_2.0.0         rmarkdown_2.14             </span>
-<span class="co">## [107] progress_1.2.2              quantsmooth_1.58.0         </span>
-<span class="co">## [109] grid_4.1.1                  data.table_1.14.2          </span>
-<span class="co">## [111] blob_1.2.3                  digest_0.6.29              </span>
-<span class="co">## [113] tidyr_1.2.0                 textshaping_0.3.6          </span>
-<span class="co">## [115] bslib_0.3.1</span></code></pre>
+<span class="co">##  [71] highr_0.9                   BiocIO_1.2.0               </span>
+<span class="co">##  [73] desc_1.4.1                  foreach_1.5.2              </span>
+<span class="co">##  [75] filelock_1.0.2              BiocParallel_1.26.2        </span>
+<span class="co">##  [77] operator.tools_1.6.3        rlang_1.0.2                </span>
+<span class="co">##  [79] pkgconfig_2.0.3             systemfonts_1.0.4          </span>
+<span class="co">##  [81] matrixStats_0.62.0          bitops_1.0-7               </span>
+<span class="co">##  [83] SeqArray_1.32.0             evaluate_0.15              </span>
+<span class="co">##  [85] lattice_0.20-45             purrr_0.3.4                </span>
+<span class="co">##  [87] GenomicAlignments_1.28.0    bit_4.0.4                  </span>
+<span class="co">##  [89] tidyselect_1.1.2            magrittr_2.0.3             </span>
+<span class="co">##  [91] bookdown_0.26               R6_2.5.1                   </span>
+<span class="co">##  [93] generics_0.1.2              DelayedArray_0.18.0        </span>
+<span class="co">##  [95] DBI_1.1.2                   withr_2.5.0                </span>
+<span class="co">##  [97] mgcv_1.8-40                 pillar_1.7.0               </span>
+<span class="co">##  [99] GWASExactHW_1.01            survival_3.3-1             </span>
+<span class="co">## [101] KEGGREST_1.32.0             RCurl_1.98-1.6             </span>
+<span class="co">## [103] tibble_3.1.6                crayon_1.5.1               </span>
+<span class="co">## [105] utf8_1.2.2                  BiocFileCache_2.0.0        </span>
+<span class="co">## [107] rmarkdown_2.14              progress_1.2.2             </span>
+<span class="co">## [109] quantsmooth_1.58.0          grid_4.1.1                 </span>
+<span class="co">## [111] data.table_1.14.2           blob_1.2.3                 </span>
+<span class="co">## [113] digest_0.6.29               tidyr_1.2.0                </span>
+<span class="co">## [115] textshaping_0.3.6           bslib_0.3.1</span></code></pre>
 <p><br><br></p>
 </div>
 <div class="section level2">
