@@ -19,6 +19,12 @@
     <loc>/reference/add1KG2SampleGDS.html</loc>
   </url>
   <url>
+    <loc>/reference/addBlockFromPlink2GDS.html</loc>
+  </url>
+  <url>
+    <loc>/reference/addGDS1KGLDBlock.html</loc>
+  </url>
+  <url>
     <loc>/reference/addGDSRef.html</loc>
   </url>
   <url>
@@ -92,6 +98,9 @@
   </url>
   <url>
     <loc>/reference/prepPed1KG.html</loc>
+  </url>
+  <url>
+    <loc>/reference/processBlockChr.html</loc>
   </url>
   <url>
     <loc>/reference/projectSample2PCA.html</loc>
