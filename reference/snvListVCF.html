@@ -56,7 +56,7 @@ a VCF file.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">snvListVCF</span><span class="op">(</span><span class="va">gds</span>, <span class="va">fileOUT</span>, offset <span class="op">=</span> <span class="fl">0L</span>, freqCutoff <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">snvListVCF</span><span class="op">(</span><span class="va">gds</span>, <span class="va">fileOUT</span>, offset <span class="op">=</span> <span class="fl">0L</span>, freqCutoff <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -65,20 +65,29 @@ a VCF file.</p>
 <dd><p>an object of class
 <code><a href="https://rdrr.io/pkg/SNPRelate/man/SNPGDSFileClass-class.html" class="external-link">SNPRelate::SNPGDSFileClass</a></code>, a SNP
 GDS file.</p></dd>
+
+
 <dt>fileOUT</dt>
 <dd><p>a <code>character</code> string representing the path and file
 name of the VCF file that will be created wit the retained SNP information.</p></dd>
+
+
 <dt>offset</dt>
 <dd><p>a single <code>integer</code> that is added to the SNP position to
 switch from 0-based to 1-based coordinate when needed (or reverse).
 Default: <code>0L</code>.</p></dd>
+
+
 <dt>freqCutoff</dt>
 <dd><p>a single positive <code>numeric</code> specifying the cut-off to
 keep a SNP. If <code>NULL</code>, all SNPs are retained. Default: <code>NULL</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The integer <code>0</code> when successful.</p>
+    
+
+<p>The integer <code>0</code> when successful.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -87,12 +96,12 @@ keep a SNP. If <code>NULL</code>, all SNPs are retained. Default: <code>NULL</co
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">## Path to the demo pedigree file is located in this package</span></span>
-<span class="r-in"><span class="va">data.dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package<span class="op">=</span><span class="st">"aicsPaper"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## TODO</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Path to the demo pedigree file is located in this package</span></span></span>
+<span class="r-in"><span><span class="va">data.dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package<span class="op">=</span><span class="st">"aicsPaper"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## TODO</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -107,7 +116,7 @@ keep a SNP. If <code>NULL</code>, all SNPs are retained. Default: <code>NULL</co
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

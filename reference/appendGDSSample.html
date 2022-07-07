@@ -56,23 +56,30 @@ study must be fill.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">appendGDSSample</span><span class="op">(</span><span class="va">gds</span>, <span class="va">pedDF</span>, batch <span class="op">=</span> <span class="fl">1</span>, listSamples <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">appendGDSSample</span><span class="op">(</span><span class="va">gds</span>, <span class="va">pedDF</span>, batch <span class="op">=</span> <span class="fl">1</span>, listSamples <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>gds</dt>
 <dd><p>a <code>gds</code>.</p></dd>
+
+
 <dt>pedDF</dt>
 <dd><p>a <code>data.frame</code> with the sample info. Must have the column
 sample.id, Name.ID, sex, pop.group, superPop and batch. The unique id
 of pedDF is Name.ID and the row.name is Name.ID too.</p></dd>
+
+
 <dt>listSamples</dt>
 <dd><p>a <code>array</code> with the sample from pedDF$Name.ID to keep</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The integer <code>0</code> when successful.</p>
+    
+
+<p>The integer <code>0</code> when successful.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -81,9 +88,9 @@ of pedDF is Name.ID and the row.name is Name.ID too.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># TODO</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># TODO</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -99,7 +106,7 @@ of pedDF is Name.ID and the row.name is Name.ID too.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

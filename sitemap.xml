@@ -58,7 +58,25 @@
     <loc>/reference/basePCASample.html</loc>
   </url>
   <url>
+    <loc>/reference/computeAlleleFraction.html</loc>
+  </url>
+  <url>
     <loc>/reference/computeAllelicFraction.html</loc>
+  </url>
+  <url>
+    <loc>/reference/computeAllelicFractionDNA.html</loc>
+  </url>
+  <url>
+    <loc>/reference/computeAllelicImbDNAChr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/computeLOHBlocksDNAChr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/computePCAForSamples.html</loc>
+  </url>
+  <url>
+    <loc>/reference/computePrunedPCARef.html</loc>
   </url>
   <url>
     <loc>/reference/gds2tfam.html</loc>
@@ -86,6 +104,9 @@
   </url>
   <url>
     <loc>/reference/generatePhase1KG2GDS.html</loc>
+  </url>
+  <url>
+    <loc>/reference/getTableSNV.html</loc>
   </url>
   <url>
     <loc>/reference/groupChr1KGSNV.html</loc>
@@ -122,5 +143,11 @@
   </url>
   <url>
     <loc>/reference/snvListVCF.html</loc>
+  </url>
+  <url>
+    <loc>/reference/testAlleleFractionChange.html</loc>
+  </url>
+  <url>
+    <loc>/reference/testEmptyBox.html</loc>
   </url>
 </urlset>

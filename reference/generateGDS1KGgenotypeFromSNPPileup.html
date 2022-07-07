@@ -50,48 +50,69 @@ pileup</h1>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">generateGDS1KGgenotypeFromSNPPileup</span><span class="op">(</span>
-  <span class="va">gds</span>,
-  <span class="va">PATHGENO</span>,
-  <span class="va">listSamples</span>,
-  <span class="va">listPos</span>,
-  <span class="va">offset</span>,
-  minCov <span class="op">=</span> <span class="fl">10</span>,
-  minProb <span class="op">=</span> <span class="fl">0.999</span>,
-  seqError <span class="op">=</span> <span class="fl">0.001</span>,
-  KEEPCOV <span class="op">=</span> <span class="cn">TRUE</span>,
-  PATHGDSSAMPLE <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generateGDS1KGgenotypeFromSNPPileup</span><span class="op">(</span></span>
+<span>  <span class="va">gds</span>,</span>
+<span>  <span class="va">PATHGENO</span>,</span>
+<span>  <span class="va">listSamples</span>,</span>
+<span>  <span class="va">listPos</span>,</span>
+<span>  <span class="va">offset</span>,</span>
+<span>  minCov <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  minProb <span class="op">=</span> <span class="fl">0.999</span>,</span>
+<span>  seqError <span class="op">=</span> <span class="fl">0.001</span>,</span>
+<span>  KEEPCOV <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  PATHGDSSAMPLE <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>gds</dt>
 <dd><p>a <code>gds</code> object.</p></dd>
+
+
 <dt>PATHGENO</dt>
 <dd><p>TODO a PATH to a directory with the a file for each
 samples with the genotype.</p></dd>
+
+
 <dt>listSamples</dt>
 <dd><p>a <code>array</code> with the sample to keep</p></dd>
+
+
 <dt>listPos</dt>
 <dd><p>a <code>array</code></p></dd>
+
+
 <dt>offset</dt>
 <dd><p>a <code>integer</code> to adjust if the genome start at 0 or 1</p></dd>
+
+
 <dt>minCov</dt>
 <dd><p>a <code>array</code> with the sample to keep</p></dd>
+
+
 <dt>minProb</dt>
 <dd><p>a <code>array</code> with the sample to keep</p></dd>
+
+
 <dt>seqError</dt>
 <dd><p>a <code>array</code> with the sample to keep</p></dd>
+
+
 <dt>KEEPCOV</dt>
 <dd><p>TODO a <code>logical</code> if it is keeping the coverage</p></dd>
+
+
 <dt>PATHGDSSAMPLE</dt>
 <dd><p>TODO a PATH to a directory where a gds specific
 to the samples with coverage info is keep</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The integer <code>0</code> when successful.</p>
+    
+
+<p>The integer <code>0</code> when successful.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -100,12 +121,12 @@ to the samples with coverage info is keep</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">## Path to the demo pedigree file is located in this package</span></span>
-<span class="r-in"><span class="va">data.dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package<span class="op">=</span><span class="st">"aicsPaper"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## TODO</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Path to the demo pedigree file is located in this package</span></span></span>
+<span class="r-in"><span><span class="va">data.dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package<span class="op">=</span><span class="st">"aicsPaper"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## TODO</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -120,7 +141,7 @@ to the samples with coverage info is keep</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
