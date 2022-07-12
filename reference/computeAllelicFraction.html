@@ -51,6 +51,7 @@
 <span>  <span class="va">gds</span>,</span>
 <span>  <span class="va">gdsSample</span>,</span>
 <span>  <span class="va">chrInfo</span>,</span>
+<span>  studyType <span class="op">=</span> <span class="st">"DNA"</span>,</span>
 <span>  minCov <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  minProb <span class="op">=</span> <span class="fl">0.999</span>,</span>
 <span>  eProb <span class="op">=</span> <span class="fl">0.001</span>,</span>
@@ -75,6 +76,10 @@ GDS file.</p></dd>
 <dt>chrInfo</dt>
 <dd><p>a vector chrInfo[i] = length(Hsapiens[[paste0("chr", i)]])
 Hsapiens library(BSgenome.Hsapiens.UCSC.hg38)</p></dd>
+
+
+<dt>studyType</dt>
+<dd><p>a <code>string</code> with value as DNA, ...</p></dd>
 
 
 <dt>minCov</dt>

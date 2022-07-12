@@ -59,7 +59,9 @@ pileup</h1>
 <span>  minCov <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  minProb <span class="op">=</span> <span class="fl">0.999</span>,</span>
 <span>  seqError <span class="op">=</span> <span class="fl">0.001</span>,</span>
-<span>  KEEPCOV <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">pedStudy</span>,</span>
+<span>  <span class="va">batch</span>,</span>
+<span>  <span class="va">studyDF</span>,</span>
 <span>  PATHGDSSAMPLE <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -99,13 +101,24 @@ samples with the genotype.</p></dd>
 <dd><p>a <code>array</code> with the sample to keep</p></dd>
 
 
-<dt>KEEPCOV</dt>
-<dd><p>TODO a <code>logical</code> if it is keeping the coverage</p></dd>
+<dt>batch</dt>
+<dd><p>a <code>integer</code> corresponding</p></dd>
+
+
+<dt>studyDF</dt>
+<dd><p>a <code>data.frame</code> with at least the column study.id,
+study.desc and study.platform</p></dd>
 
 
 <dt>PATHGDSSAMPLE</dt>
 <dd><p>TODO a PATH to a directory where a gds specific
 to the samples with coverage info is keep</p></dd>
+
+
+<dt>pedDF</dt>
+<dd><p>a <code>data.frame</code> with the sample info. Must have the column
+sample.id, Name.ID, sex, pop.group, superPop and batch. The unique id of
+pedDF is Name.ID and the row.name is Name.ID too.</p></dd>
 
 </dl></div>
     <div id="value">
