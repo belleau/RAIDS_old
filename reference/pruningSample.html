@@ -74,11 +74,13 @@
 
 
 <dt>method</dt>
-<dd><p>the parameter method in SNPRelate::snpgdsLDpruning</p></dd>
+<dd><p>a <code>character</code> string representing the method used in
+SNPRelate::snpgdsLDpruning() fucntion.
+Default: <code>"corr"</code>.</p></dd>
 
 
 <dt>sampleCurrent</dt>
-<dd><p>A <code>string</code> corresponding to
+<dd><p>A <code>character</code> string corresponding to
 the sample.id
 use in LDpruning</p></dd>
 
@@ -89,35 +91,36 @@ use in LDpruning</p></dd>
 
 
 <dt>listSNP</dt>
-<dd><p>the list of snp.id keep</p></dd>
+<dd><p>the list of snp.id keep. TODO. Default: <code>NULL</code>.</p></dd>
 
 
 <dt>slide.max.bp.v</dt>
-<dd><p>TODO</p></dd>
+<dd><p>a single <code>numeric</code> TODO. Default: <code>5e5</code>.</p></dd>
 
 
 <dt>ld.threshold.v</dt>
-<dd><p>TODO</p></dd>
+<dd><p>a single <code>numeric</code> TODO.
+Default: <code>sqrt(0.1)</code>.</p></dd>
 
 
 <dt>np</dt>
-<dd><p>TODO</p></dd>
+<dd><p>TODO. Default: <code>1</code>.</p></dd>
 
 
 <dt>verbose.v</dt>
-<dd><p>TODO</p></dd>
+<dd><p>TODO. Default: <code>FALSE</code>.</p></dd>
 
 
 <dt>chr</dt>
-<dd><p>TODO</p></dd>
+<dd><p>TODO. Default: <code>NULL</code>.</p></dd>
 
 
 <dt>minAF.SuperPop</dt>
-<dd><p>TODO</p></dd>
+<dd><p>TODO. Default: <code>NULL</code>.</p></dd>
 
 
 <dt>keepGDSpruned</dt>
-<dd><p>TODO</p></dd>
+<dd><p>a <code>boolean</code> TODO. Default: <code>TRUE</code>.</p></dd>
 
 
 <dt>PATHSAMPLEGDS</dt>
@@ -125,24 +128,23 @@ use in LDpruning</p></dd>
 
 
 <dt>keepFile</dt>
-<dd><p>TODO</p></dd>
+<dd><p>a <code>boolean</code> indicating if the file must be TODO.
+Default: <code>FALSE</code>.</p></dd>
 
 
 <dt>PATHPRUNED</dt>
-<dd><p>TODO</p></dd>
+<dd><p>a <code>character</code> string TODO. Default: <code>"."</code>.</p></dd>
 
 
 <dt>outPref</dt>
-<dd><p>TODO</p></dd>
+<dd><p>TODO. Default: <code>"pruned"</code>.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>TODO a <code>vector</code> of <code>string</code></p>
-
-
+<p><code>0L</code> when successful.</p>
     </div>
     <div id="author">
     <h2>Author</h2>

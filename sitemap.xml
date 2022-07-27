@@ -40,6 +40,9 @@
     <loc>/reference/addRef2GDS1KG.html</loc>
   </url>
   <url>
+    <loc>/reference/addStudy1Kg.html</loc>
+  </url>
+  <url>
     <loc>/reference/addStudyGDSSample.html</loc>
   </url>
   <url>
@@ -79,10 +82,16 @@
     <loc>/reference/computeAllelicImbDNAChr.html</loc>
   </url>
   <url>
+    <loc>/reference/computeKNNSuperPoprSynthetic.html</loc>
+  </url>
+  <url>
     <loc>/reference/computeLOHBlocksDNAChr.html</loc>
   </url>
   <url>
     <loc>/reference/computePCAForSamples.html</loc>
+  </url>
+  <url>
+    <loc>/reference/computePCAsynthetic.html</loc>
   </url>
   <url>
     <loc>/reference/computePrunedPCARef.html</loc>
@@ -92,6 +101,9 @@
   </url>
   <url>
     <loc>/reference/gds2tfam.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gds2tfamSample.html</loc>
   </url>
   <url>
     <loc>/reference/gds2tped.html</loc>
@@ -155,6 +167,9 @@
   </url>
   <url>
     <loc>/reference/runLDPruning.html</loc>
+  </url>
+  <url>
+    <loc>/reference/select1KGPop.html</loc>
   </url>
   <url>
     <loc>/reference/snvListVCF.html</loc>

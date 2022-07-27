@@ -70,7 +70,7 @@
 <div class="section level1">
 <div class="page-header"><h1 id="accurate-inference-of-genetic-ancestry-from-cancer-derived-molecular-data">Accurate inference of genetic ancestry from cancer-derived molecular data<a class="anchor" aria-label="anchor" href="#accurate-inference-of-genetic-ancestry-from-cancer-derived-molecular-data"></a>
 </h1></div>
-<p>The <strong><em>aicsPaper</em></strong> package enables accurate and robust inference of genetic ancestry from various types of molecular data, including whole-genome, whole-exome, targeted gene panels and RNA sequences, as described in our bioRxiv manuscript. Our tools retain high accuracy in presence of somatic alterations, such as those caused by cancer.</p>
+<p>The <strong><em>RAIDS</em></strong> package enables accurate and robust inference of genetic ancestry from various types of molecular data, including whole-genome, whole-exome, targeted gene panels and RNA sequences, as described in our bioRxiv manuscript. Our tools retain high accuracy in presence of somatic alterations, such as those caused by cancer.</p>
 <p><strong>This code and analysis pipeline was designed and developed for the following publication:</strong></p>
 <blockquote><p>Pascal Belleau, Astrid Deschênes, David A. Tuveson, Alexander Krasnitz. Accurate and robust inference of genetic ancestry from cancer-derived molecular data across genomic platforms. bioRxiv 2022.02.01.478737; doi: <a href="https://doi.org/10.1101/2022.02.01.478737" class="external-link uri">https://doi.org/10.1101/2022.02.01.478737</a></p></blockquote>
 <div class="section level2">
@@ -91,20 +91,20 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="do">## Load required package</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">library</span>(devtools)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="do">## Install the latest version of aicsPaper</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'belleau/aicsPaper'</span>)</span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="do">## Install the latest version of RAIDS</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'KrasnitzLab/RAIDS'</span>)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h2>
-<p><a href="https://adeschen.github.io/aicsPaper/" class="external-link">aicsPaper Website</a></p>
-<p><a href="https://adeschen.github.io/aicsPaper/articles/aicsPaper.html" class="external-link">aicsPaper Get Started</a></p>
+<p><a href="https://adeschen.github.io/aicsPaper/" class="external-link">RAIDS Website</a></p>
+<p><a href="https://adeschen.github.io/aicsPaper/articles/aicsPaper.html" class="external-link">RAIDS Get Started</a></p>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
-<p>This package and the underlying <strong><em>aicsPaper</em></strong> code are distributed under the Artistic license 2.0. You are free to use and redistribute this software.</p>
-<p>For more information on Artistic 2.0 License see <a href="http://opensource.org/licenses/Artistic-2.0" class="external-link">http://opensource.org/licenses/Artistic-2.0</a></p>
+<p>This package and the underlying <strong><em>RAIDS</em></strong> code are distributed under the Apache-2.0 license. You are free to use and redistribute this software.</p>
+<p>For more information on Apache-2.0 License see <a href="https://opensource.org/licenses/Apache-2.0" class="external-link">https://opensource.org/licenses/Apache-2.0</a></p>
 </div>
 <div class="section level2">
 <h2 id="maintainer">Maintainer<a class="anchor" aria-label="anchor" href="#maintainer"></a>
@@ -114,7 +114,7 @@
 <div class="section level2">
 <h2 id="bugsfeature-requests">Bugs/Feature requests<a class="anchor" aria-label="anchor" href="#bugsfeature-requests"></a>
 </h2>
-<p>If you have any bugs or feature requests, <a href="https://github.com/belleau/aicsPaper/issues" class="external-link">let us know</a>.</p>
+<p>If you have any bugs or feature requests, <a href="https://github.com/KrasnitzLab/RAIDS/issues" class="external-link">let us know</a>.</p>
 <p>Thanks!</p>
 </div>
 </div>
@@ -125,7 +125,7 @@
     <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/Artistic-2.0" class="external-link">Artistic-2.0</a></li>
+<li>Apache License (== 2.0)</li>
 </ul>
 </div>
 
@@ -149,7 +149,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://opensource.org/licenses/Artistic-2.0" class="external-link"><img src="https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg" alt="License: Artistic-2.0"></a></li>
+<li><a href="https://opensource.org/licenses/Apache-2.0" class="external-link"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a></li>
 <li><a href="https://codecov.io/gh/belleau/aicsPaper" class="external-link"><img src="https://codecov.io/gh/belleau/aicsPaper/branch/main/graph/badge.svg?token=LPFLOMUDVT" alt="codecov"></a></li>
 <li><a href="https://github.com/adeschen/aicsPaper/actions/workflows/check-bioc.yaml" class="external-link"><img src="https://github.com/adeschen/aicsPaper/actions/workflows/check-bioc.yaml/badge.svg" alt="R-CMD-check-bioc"></a></li>
 </ul>

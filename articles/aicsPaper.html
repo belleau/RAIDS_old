@@ -70,18 +70,18 @@
 
     
     
-<p><br><strong>Package</strong>: <em>aicsPaper</em><br><strong>Authors</strong>: Pascal Belleau [cre, aut] (<a href="https://orcid.org/0000-0002-0802-1071" class="external-link uri">https://orcid.org/0000-0002-0802-1071</a>), Astrid Deschênes [aut] (<a href="https://orcid.org/0000-0001-7846-6749" class="external-link uri">https://orcid.org/0000-0001-7846-6749</a>), Alexander Krasnitz [aut]<br><strong>Version</strong>: 0.50.0<br><strong>Compiled date</strong>: 2022-07-20<br><strong>License</strong>: Artistic-2.0<br></p>
+<p><br><strong>Package</strong>: <em>aicsPaper</em><br><strong>Authors</strong>: Pascal Belleau [cre, aut] (<a href="https://orcid.org/0000-0002-0802-1071" class="external-link uri">https://orcid.org/0000-0002-0802-1071</a>), Astrid Deschênes [aut] (<a href="https://orcid.org/0000-0001-7846-6749" class="external-link uri">https://orcid.org/0000-0001-7846-6749</a>), Alexander Krasnitz [aut]<br><strong>Version</strong>: 0.50.0<br><strong>Compiled date</strong>: 2022-07-27<br><strong>License</strong>: Apache License (== 2.0)<br></p>
 <div class="section level2">
 <h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>
 </h2>
-<p>The <em><a href="https://github.com/belleau/aicsPaper" class="external-link">aicsPaper</a></em> package and the underlying <em><a href="https://github.com/belleau/aicsPaper" class="external-link">aicsPaper</a></em> code are distributed under<br>
-the Artistic license 2.0. You are free to use and redistribute this software.</p>
+<p>The <em><a href="https://github.com/KrasnitzLab/RAIDS" class="external-link">RAIDS</a></em> package and the underlying <em><a href="https://github.com/KrasnitzLab/RAIDS" class="external-link">RAIDS</a></em> code are distributed under<br>
+the <a href="https://opensource.org/licenses/Apache-2.0" class="external-link uri">https://opensource.org/licenses/Apache-2.0</a> license. You are free to use and redistribute this software.</p>
 <p><br><br></p>
 </div>
 <div class="section level2">
 <h2 id="citing">Citing<a class="anchor" aria-label="anchor" href="#citing"></a>
 </h2>
-<p>If you use this package for a publication, we would ask you to cite the following:</p>
+<p>If you use the <strong>RAIDS</strong> package for a publication, we would ask you to cite the following:</p>
 <blockquote>
 <p>Pascal Belleau, Astrid Deschênes, David A. Tuveson, Alexander Krasnitz. Accurate and robust inference of genetic ancestry from cancer-derived molecular data across genomic platforms. bioRxiv 2022.02.01.478737; doi: <a href="https://doi.org/10.1101/2022.02.01.478737" class="external-link uri">https://doi.org/10.1101/2022.02.01.478737</a></p>
 </blockquote>
@@ -91,19 +91,20 @@ the Artistic license 2.0. You are free to use and redistribute this software.</p
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>Multiple methods have been implemented to infer ancestry from germline DNA sequence <span class="citation">(Price et al. 2006; Pritchard, Stephens, and Donnelly 2000; Alexander, Novembre, and Lange 2009)</span>. However, genotyping of DNA from matched normal specimens is not part of standard clinical practice and is not performed routinely outside academic clinical centers. In sum, matched germline DNA sequence is often missing for cancer-derived molecular data. In such cases, having the possibility to infer ancestry from tumor-derived data would be beneficial.</p>
-<p>The <strong>aicsPaper</strong> package implements an inference procedure that has been specifically developed to accurately infer genetic ancestry from cancer-derived sequencing. The covered cancer-derived sequencing are, more specifically, tumor exomes, targeted gene panels and RNA sequences.</p>
+<p>The <strong>RAIDS</strong> package implements an inference procedure that has been specifically developed to accurately infer genetic ancestry from cancer-derived sequencing. The covered cancer-derived sequencing are, more specifically, tumor exomes, targeted gene panels and RNA sequences.</p>
+<p>The <strong>RAIDS</strong> package includes a data synthesis method that enables the selection of the best parameters for a specific cancer profile and also permits a statistically assessment of inference accuracy for an individual cancer-derived molecular profile.</p>
 <p><br><br></p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>To install the latest version accessible on the <a href="https://github.com/belleau/aicsPaper" title="aicsPaper Github Site" class="external-link">aicsPaper Github Website</a>, the <em><a href="https://CRAN.R-project.org/package=devtools" class="external-link">devtools</a></em> package is required.</p>
+<p>To install the latest version accessible on the <a href="https://github.com/KrasnitzLab/RAIDS" title="RAIDS Github Site" class="external-link">RAIDS Github Website</a>, the <em><a href="https://CRAN.R-project.org/package=devtools" class="external-link">devtools</a></em> package is required.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Load required package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## Install the latest version of aicsPaper</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'belleau/aicsPaper'</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">## Install the latest version of RAIDS</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'KrasnitzLab/RAIDS'</span><span class="op">)</span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -132,8 +133,12 @@ An overview of the genetic ancestry inference process.
 Step 1 - Formatting the information from 1000 Genomes (optional)
 </p>
 </div>
+<hr>
+<p><span style="color:darkred;font-weight:bold">Beware that a pre-processed 1KG GDS file is available at this address:</span></p>
+<p><span style="color:red"> <a href="https://labshare.cshl.edu/shares/krasnitzlab/aicsPaper/matGeno1000g.gds" class="external-link">https://labshare.cshl.edu/shares/krasnitzlab/aicsPaper/matGeno1000g.gds</a> </span></p>
+<p><span style="color:darkred;font-weight:bold">The size of the file is 15GB.</span> <span style="color:darkred;font-weight:bold">This section can be skipped if you choose to use this file.</span></p>
+<hr>
 <p>This section explains in further details how to generate the 1000 Genomes (1KG) GDS file that is needed to run the ancestry inference tool. Beware that it is unnecessary to re-run those steps as the 1KG GDS file is publicly available.</p>
-<p><span style="color:red">The 1KG GDS file will be available soon.</span></p>
 <p>More specifically, the formatting of the 1KG information includes all those sub-steps:</p>
 <ol style="list-style-type: decimal">
 <li>Download the required files from 1KG</li>
@@ -546,6 +551,14 @@ Step 2 - Formatting the information from an external study
 </div>
 </div>
 <div class="section level2">
+<h2 id="pre-processed-files-are-available">Pre-processed files are available<a class="anchor" aria-label="anchor" href="#pre-processed-files-are-available"></a>
+</h2>
+<p>Pre-processed files, such as the 1KG GDS file, are available at this address:</p>
+<p><a href="https://labshare.cshl.edu/shares/krasnitzlab/aicsPaper" class="external-link">https://labshare.cshl.edu/shares/krasnitzlab/aicsPaper</a></p>
+<p>Beware that some of those files are voluminous.</p>
+<p><br><br></p>
+</div>
+<div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <p>Here is the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code> on the system on which this document was compiled:</p>
@@ -579,7 +592,7 @@ Step 2 - Formatting the information from an external study
 <span><span class="co">## [13] BiocGenerics_0.38.0    mgcv_1.8-40            DNAcopy_1.66.0        </span></span>
 <span><span class="co">## [16] withr_2.5.0            tidyselect_1.1.2       bit_4.0.4             </span></span>
 <span><span class="co">## [19] compiler_4.1.1         textshaping_0.3.6      cli_3.3.0             </span></span>
-<span><span class="co">## [22] quantreg_5.93          Biobase_2.52.0         mice_3.14.0           </span></span>
+<span><span class="co">## [22] quantreg_5.94          Biobase_2.52.0         mice_3.14.0           </span></span>
 <span><span class="co">## [25] SparseM_1.81           desc_1.4.1             sandwich_3.0-2        </span></span>
 <span><span class="co">## [28] bookdown_0.27          sass_0.4.2             lmtest_0.9-40         </span></span>
 <span><span class="co">## [31] quantsmooth_1.58.0     pkgdown_2.0.6          systemfonts_1.0.4     </span></span>
@@ -602,9 +615,9 @@ Step 2 - Formatting the information from an external study
 <span><span class="co">## [82] foreach_1.5.2          MatrixModels_0.5-0     purrr_0.3.4           </span></span>
 <span><span class="co">## [85] tidyr_1.2.0            SeqArray_1.32.0        assertthat_0.2.1      </span></span>
 <span><span class="co">## [88] cachem_1.0.6           xfun_0.31              broom_1.0.0           </span></span>
-<span><span class="co">## [91] SeqVarTools_1.30.0     ragg_1.2.2             survival_3.3-1        </span></span>
-<span><span class="co">## [94] tibble_3.1.7           iterators_1.0.14       IRanges_2.26.0        </span></span>
-<span><span class="co">## [97] memoise_2.0.1          ellipsis_0.3.2</span></span></code></pre>
+<span><span class="co">## [91] SeqVarTools_1.30.0     class_7.3-20           ragg_1.2.2            </span></span>
+<span><span class="co">## [94] survival_3.3-1         tibble_3.1.8           iterators_1.0.14      </span></span>
+<span><span class="co">## [97] memoise_2.0.1          IRanges_2.26.0</span></span></code></pre>
 <p><br><br></p>
 </div>
 <div class="section level2">
