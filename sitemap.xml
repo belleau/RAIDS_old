@@ -19,6 +19,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/RAIDS-package.html</loc>
+  </url>
+  <url>
     <loc>/reference/add1KG2SampleGDS.html</loc>
   </url>
   <url>
@@ -53,9 +56,6 @@
   </url>
   <url>
     <loc>/reference/addUpdateSegment.html</loc>
-  </url>
-  <url>
-    <loc>/reference/aicsPaper-package.html</loc>
   </url>
   <url>
     <loc>/reference/appendGDSSample.html</loc>
