@@ -100,6 +100,12 @@
     <loc>/reference/computePrunedPCARef.html</loc>
   </url>
   <url>
+    <loc>/reference/computeSyntheticConfMat.html</loc>
+  </url>
+  <url>
+    <loc>/reference/computeSyntheticROC.html</loc>
+  </url>
+  <url>
     <loc>/reference/estimateAllelicFraction.html</loc>
   </url>
   <url>
@@ -149,6 +155,9 @@
   </url>
   <url>
     <loc>/reference/prepPed1KG.html</loc>
+  </url>
+  <url>
+    <loc>/reference/prepPedSynthetic1KG.html</loc>
   </url>
   <url>
     <loc>/reference/prepSynthetic.html</loc>
