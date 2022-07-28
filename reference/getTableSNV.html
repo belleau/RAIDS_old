@@ -78,34 +78,47 @@ GDS file.</p></dd>
 
 
 <dt>sampleCurrent</dt>
-<dd><p>A <code>string</code> corresponding to
-the sample.id
-use in LDpruning</p></dd>
+<dd><p>A <code>character</code> string corresponding to
+the sample.id used in LDpruning.</p></dd>
 
 
 <dt>study.id</dt>
 <dd><p>A <code>string</code> corresponding to the study
-use in LDpruning</p></dd>
+use in LDpruning.</p></dd>
 
 
 <dt>minCov</dt>
-<dd><p>an <code>integer</code> default 10</p></dd>
+<dd><p>a single positive <code>integer</code> representing the
+minimum coverage needed to retain TODO. Default: <code>10</code>.</p></dd>
 
 
 <dt>minProb</dt>
-<dd><p>an <code>numeric</code> betweeen 0 and 1</p></dd>
+<dd><p>a single <code>numeric</code> between <code>0</code> and <code>1</code>
+representing TODO.
+Default: <code>0.999</code>.</p></dd>
 
 
 <dt>eProb</dt>
-<dd><p>an <code>numeric</code> betweeen 0 and 1 probability of sequencing error</p></dd>
+<dd><p>a single <code>numeric</code> between <code>0</code> and <code>1</code>
+representing the probability of sequencing error. Default: <code>0.001</code>.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>data.frame snp.pos TODO.</p>
-    </div>
+<p>a <code>data.frame</code> containing:</p><ul><li><p>cnt.tot a single <code>integer</code> representing the total coverage for
+the SNV.</p></li>
+<li><p>cnt.ref a single <code>integer</code> representing the coverage for
+the reference allele.</p></li>
+<li><p>cnt.alt a single <code>integer</code> representing the coverage for
+the alternative allele.</p></li>
+<li><p>snp.pos a single <code>integer</code> representing the SNV position.</p></li>
+<li><p>snp.chr a single <code>integer</code> representing the SNV chromosome.</p></li>
+<li><p>normal.geno a single <code>numeric</code> <code>3</code> indicating that
+the normal genotype is unknown. TODO</p></li>
+<li><p>snp.index The <code>boolean</code> <code>FALSE</code> indicating TODO</p></li>
+</ul></div>
     <div id="author">
     <h2>Author</h2>
     <p>Pascal Belleau, Astrid Deschênes and Alexander Krasnitz</p>
