@@ -77,11 +77,12 @@ The directory sampleGeno must contain matFreqSNV.txt.bz2</p></dd>
 
 
 <dt>fileNameGDS</dt>
-<dd><p>TODO</p></dd>
+<dd><p>a <code>character</code> string representing the file name of
+the GDS study file that will be created. TODO</p></dd>
 
 
 <dt>batch</dt>
-<dd><p>TODO</p></dd>
+<dd><p>TODO . Default: <code>1</code>.</p></dd>
 
 
 <dt>studyDF</dt>
@@ -90,7 +91,8 @@ The directory sampleGeno must contain matFreqSNV.txt.bz2</p></dd>
 
 <dt>listSamples</dt>
 <dd><p>A <code>vector</code> of <code>string</code> corresponding to
-the sample.ids. if NULL all samples</p></dd>
+the sample.ids. If <code>NULL</code> all samples are selected.
+Default: <code>NULL</code>.</p></dd>
 
 
 <dt>PATHSAMPLEGDS</dt>
@@ -102,7 +104,7 @@ to the samples with coverage info is keep</p></dd>
     <h2>Value</h2>
     
 
-<p>None</p>
+<p>The function returns <code>OL</code> when successful.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
