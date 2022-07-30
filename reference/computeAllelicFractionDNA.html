@@ -60,7 +60,7 @@
 <span>  <span class="va">sampleCurrent</span>,</span>
 <span>  <span class="va">study.id</span>,</span>
 <span>  <span class="va">chrInfo</span>,</span>
-<span>  minCov <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  minCov <span class="op">=</span> <span class="fl">10L</span>,</span>
 <span>  minProb <span class="op">=</span> <span class="fl">0.999</span>,</span>
 <span>  eProb <span class="op">=</span> <span class="fl">0.001</span>,</span>
 <span>  cutOffLOH <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>,</span>
@@ -82,14 +82,14 @@ GDS file.</p></dd>
 
 
 <dt>sampleCurrent</dt>
-<dd><p>A <code>string</code> corresponding to
-the sample.id
-use in LDpruning</p></dd>
+<dd><p>A <code>character</code> string corresponding to
+the sample identifier as used in <code><a href="pruningSample.html">pruningSample</a></code> function.</p></dd>
 
 
 <dt>study.id</dt>
-<dd><p>A <code>character</code> string corresponding to the study
-used in LDpruning</p></dd>
+<dd><p>A <code>character</code> string corresponding to the naome of
+the study as
+used in <code><a href="pruningSample.html">pruningSample</a></code> function.</p></dd>
 
 
 <dt>chrInfo</dt>
@@ -98,7 +98,8 @@ Hsapiens library(BSgenome.Hsapiens.UCSC.hg38)</p></dd>
 
 
 <dt>minCov</dt>
-<dd><p>an <code>integer</code> default 10</p></dd>
+<dd><p>a single positive <code>integer</code> representing the minimum
+required coverage. Default: <code>10L</code>.</p></dd>
 
 
 <dt>minProb</dt>
