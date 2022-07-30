@@ -54,7 +54,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">computeKNNSuperPoprSynthetic</span><span class="op">(</span><span class="va">listEigenvector</span>, <span class="va">sample.ref</span>, <span class="va">study.annot</span>, <span class="va">spRef</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">computeKNNSuperPoprSynthetic</span><span class="op">(</span></span>
+<span>  <span class="va">listEigenvector</span>,</span>
+<span>  <span class="va">sample.ref</span>,</span>
+<span>  <span class="va">study.annot</span>,</span>
+<span>  <span class="va">spRef</span>,</span>
+<span>  kList <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span>,</span>
+<span>  pcaList <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">15</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -75,12 +82,21 @@ the gds</p></dd>
 <dt>spRef</dt>
 <dd><p>TODO</p></dd>
 
+
+<dt>kList</dt>
+<dd><p>TODO array of the k possible values</p></dd>
+
+
+<dt>pcaList</dt>
+<dd><p>TODO array of the pca dimension possible values</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>A <code>list</code> TODO with the sample.id and eigenvectors.</p>
+<p>A <code>list</code> TODO with the sample.id and eigenvectors
+and a table with KNN callfor different K and pca dimension.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
